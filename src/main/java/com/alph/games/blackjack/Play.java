@@ -11,16 +11,16 @@ import java.util.stream.IntStream;
 
 public class Play {
 
-    public void playGame(GameRules gameRules, int numberOfPlayers, int cardsPerPlayer ) {
+    public void playGame(GameEngine gameEngine, int numberOfPlayers, int cardsPerPlayer ) {
         Deck deck = createDeck(numberOfPlayers, cardsPerPlayer);
         List<Player> players = createPlayers(numberOfPlayers);
 
-        gameRules.dealHand(players, deck, cardsPerPlayer);
+        gameEngine.dealHand(players, deck, cardsPerPlayer);
         players.stream().forEach(p->System.out.println(p.getHandView()));
 
         Map<Player, BlackJackStatus> gameStat = new HashMap<>();
-        players.stream().forEach(p -> gameStat.put(p, gameRules.turn(p, deck)));
-        gameRules.decideWinner(gameStat);
+        players.stream().forEach(p -> gameStat.put(p, gameEngine.turn(p, deck)));
+        gameEngine.decideWinner(gameStat);
     }
 
     private List<Player> createPlayers(int numberOfPlayers) {

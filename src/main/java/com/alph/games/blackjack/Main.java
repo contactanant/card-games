@@ -14,7 +14,7 @@ public class Main {
         int numberOfPlayers = getNumberOfPlayers(args);
         int cardsPerPlayer = getNumberOfCardsPerPlayer(args);
 
-        new Play().playGame(new GameRules(STICK_TOTAL, BLACKJACK_TOTAL), numberOfPlayers, cardsPerPlayer);
+        new Play().playGame(new BlackjackGameEngine(STICK_TOTAL, BLACKJACK_TOTAL), numberOfPlayers, cardsPerPlayer);
     }
 
     private static int getNumberOfCardsPerPlayer(String[] args) {

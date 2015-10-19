@@ -15,16 +15,17 @@ import static com.alph.games.blackjack.BlackJackStatus.BLACKJACK;
 import static com.alph.games.blackjack.BlackJackStatus.BUST;
 import static com.alph.games.blackjack.BlackJackStatus.STICK;
 
-public class GameRules {
+public class BlackjackGameEngine implements GameEngine {
 
     private int sumForStick;
     private int sumForBlackJack;
 
-    public GameRules(int sumForStick, int sumForBlackJack) {
+    public BlackjackGameEngine(int sumForStick, int sumForBlackJack) {
         this.sumForStick = sumForStick;
         this.sumForBlackJack = sumForBlackJack;
     }
 
+    @Override
     public void decideWinner(Map<Player, BlackJackStatus> gameStat) {
         if (gameStat == null) {
             System.out.println("Players have not taken turns yet, can not decide winner");
@@ -41,6 +42,7 @@ public class GameRules {
         System.out.println("Game Finished");
     }
 
+    @Override
     public BlackJackStatus turn(Player p, Deck deck) {
         if (p.getHand() == null || (p.getHand().getNumberOfCards()) == 0) {
             throw new InvalidStateException("Deal cards to player before they can take turns");
@@ -67,6 +69,7 @@ public class GameRules {
         return STICK;
     }
 
+    @Override
     public void dealHand(List<Player> players, Deck deck, int cardsPerPlayer) {
         players.stream().forEach(p -> p.setHand(new Hand(deck.dealHand(cardsPerPlayer))));
     }
